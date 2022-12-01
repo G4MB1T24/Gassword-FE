@@ -18,11 +18,10 @@ const Login = () => {
 
   const [disabled, setdisabled] = useState(true);
   const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
-
+  
   const [Creds, setCreds] = useState({ email: "", password: "", mpin: "" });
   const { email, password, mpin } = Creds;
-
+  
   useEffect(() => {
     if (mpin.length === 4 && email.length > 0 && password.length > 5) {
       setdisabled(false);
@@ -30,6 +29,8 @@ const Login = () => {
       setdisabled(true);
     }
   }, [mpin , email , password ]);
+  
+  const handleClick = () => setShow(!show);
 
   const handleChange = (e) => {
     setCreds({ ...Creds, [e.target.name]: e.target.value });
