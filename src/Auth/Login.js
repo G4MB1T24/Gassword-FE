@@ -1,4 +1,4 @@
-import React, { useContext, useState , useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../Css/profile.css";
 import "../Css/index.css";
 import {
@@ -14,22 +14,22 @@ import DataContext from "../Contexts/DataContext";
 
 const Login = () => {
   const context = useContext(DataContext);
-  const { Login } = context;
+  const { Login , GetData } = context;
 
   const [disabled, setdisabled] = useState(true);
   const [show, setShow] = React.useState(false);
-  
+
   const [Creds, setCreds] = useState({ email: "", password: "", mpin: "" });
   const { email, password, mpin } = Creds;
-  
+
   useEffect(() => {
     if (mpin.length === 4 && email.length > 0 && password.length > 5) {
       setdisabled(false);
     } else {
       setdisabled(true);
     }
-  }, [mpin , email , password ]);
-  
+  }, [mpin, email, password]);
+
   const handleClick = () => setShow(!show);
 
   const handleChange = (e) => {
@@ -37,8 +37,8 @@ const Login = () => {
   };
 
   const FormSubmit = () => {
-    console.log(Creds);
     Login(email, password, mpin);
+    GetData()
   };
 
   return (

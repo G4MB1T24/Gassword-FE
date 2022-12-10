@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link to={"/"} className="mr-5 hover:text-white">
               Home
             </Link>
-            <Link to={"/"} className="mr-5 hover:text-white">
+            <Link to={"/vault"} className="mr-5 hover:text-white">
               Vault
             </Link>
           </nav>

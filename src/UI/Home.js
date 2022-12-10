@@ -3,6 +3,8 @@ import { Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import DataContext from "../Contexts/DataContext";
 import PasswordChecker from "../Components/PasswordChecker";
+import "../Css/index.css"
+
 const Home = () => {
   const context = useContext(DataContext);
   const { a } = context;
@@ -16,7 +18,7 @@ const Home = () => {
           x: 0,
         }}
         transition={{ type: "spring" }}
-        className="flex justify-center items-center"
+        className="noscroll overflowY-auto flex justify-center items-center"
       >
         <Text
           bgGradient={[
@@ -31,9 +33,9 @@ const Home = () => {
           Welcome User {a}
         </Text>
       </motion.div>
-      <div className="flex justify-center items-center">
+    
         <PasswordChecker></PasswordChecker>
-      </div>
+      
     </>
   );
 };

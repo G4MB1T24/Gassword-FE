@@ -1,31 +1,64 @@
-import React from "react";
-import { Input, Button, InputRightElement, InputGroup } from "@chakra-ui/react";
+import React, { useState } from "react";
+
+import {
+  Box,
+  Text,
+  Input,
+  Button,
+  InputRightElement,
+  InputGroup,
+  Flex,
+} from "@chakra-ui/react";
+
 const PasswordChecker = () => {
+
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-
+  const [Checker, setChecker] = useState("");
+  const handleChange = (e) => {
+    setChecker(e.target.value);
+  };
+  const CheckGate = () => {
+    if (Checker === localStorage.getItem("enc_key")) {
+      localStorage.setItem("enc_key", Checker);
+      alert("Correct");
+    } else {
+      alert("Not Correct");
+    }
+  };
   return (
     <>
-      <div className="container  w-64">
-        <h2 className="my-2">Enter your Encryption key</h2>
-        <ul>
-          <li className=" m-4 text-sm font-bold">
-            Do you still remember your Encryption key?
-          </li>
-        </ul>
-        <InputGroup size="md">
-          <Input
-            pr="4.5rem"
-            type={show ? "text" : "password"}
-            placeholder="Enter password"
-          />
-          <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {show ? "Hide" : "Show"}
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-      </div>
+      <Box h={"100vh"}>
+        <Flex justify={"center"} align={"center"}>
+          <Box>
+            <Box>
+              <Text fontWeight={"bold"}>Do you still remember your Encryption key?</Text>
+            </Box>
+            <Box mt={1}>
+              <InputGroup size="md">
+                <Input
+                  onChange={handleChange}
+                  name="checker"
+                  value={Checker}
+                  pr="4.5rem"
+                  type={show ? "text" : "password"}
+                  placeholder="Enter password"
+                />
+                <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                    {show ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </Box>
+            <Box mt={5}>
+              <Flex justify={"center"}>
+                <Button onClick={CheckGate}>Submit</Button>
+              </Flex>
+            </Box>
+          </Box>
+        </Flex>
+      </Box>
     </>
   );
 };
