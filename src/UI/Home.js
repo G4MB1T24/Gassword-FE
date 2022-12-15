@@ -1,15 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext , useEffect } from "react";
 import { Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import DataContext from "../Contexts/DataContext";
 import PasswordChecker from "../Components/PasswordChecker";
 import "../Css/index.css"
-
 const Home = () => {
   const context = useContext(DataContext);
-  const { a } = context;
+  const { GetUser , User } = context;
+  useEffect(() => {
+    GetUser();
+  })
+  
   return (
+
     <>
+      
+
       <motion.div
         initial={{
           x: -100,
@@ -18,7 +24,7 @@ const Home = () => {
           x: 0,
         }}
         transition={{ type: "spring" }}
-        className="noscroll overflowY-auto flex justify-center items-center"
+        className="scrollblock flex justify-center items-center"
       >
         <Text
           bgGradient={[
@@ -30,7 +36,7 @@ const Home = () => {
           fontSize="6xl"
           fontWeight="extrabold"
         >
-          Welcome User {a}
+          Welcome User {User}
         </Text>
       </motion.div>
     

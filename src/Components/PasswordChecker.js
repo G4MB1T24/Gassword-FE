@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import {
   Box,
   Text,
@@ -28,7 +27,7 @@ const PasswordChecker = () => {
   };
   return (
     <>
-      <Box h={"100vh"}>
+      <Box h={"9vh"}>
         <Flex justify={"center"} align={"center"}>
           <Box>
             <Box>

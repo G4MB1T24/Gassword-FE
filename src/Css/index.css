@@ -1,11 +1,9 @@
-html,
-body , h1 {
-  margin: 0;
-  padding: 0;
+
+.scrollblock {
   overflow: hidden;
 
 }
 .noscroll {
-  overflow: auto;
+  overflow-y: auto;
 }
 

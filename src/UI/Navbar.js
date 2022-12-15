@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { Text } from "@chakra-ui/react";
+import {  Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import "../Css/index.css";
 import DataContext from "../Contexts/DataContext";
 import SignupLink from "./SignupLink";
+
 const Navbar = () => {
   const context = useContext(DataContext);
   const { isAuthenticated } = context;
 
   let LoginSignup;
-
   if (isAuthenticated === true) {
     LoginSignup = <p className="hidden">Dumbfuck</p>;
   } else {
@@ -43,6 +43,9 @@ const Navbar = () => {
             </Link>
             <Link to={"/vault"} className="mr-5 hover:text-white">
               Vault
+            </Link>
+            <Link to={"/create"} className="mr-5 hover:text-white">
+              Create
             </Link>
           </nav>
           {LoginSignup}
