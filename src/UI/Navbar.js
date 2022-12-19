@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import {  Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import "../Css/index.css";
 import DataContext from "../Contexts/DataContext";
@@ -16,6 +16,11 @@ const Navbar = () => {
     LoginSignup = <SignupLink></SignupLink>;
   }
 
+  if (localStorage.getItem("isLoggedin") === "true") { 
+    LoginSignup = <p className="hidden">Dumbfuck</p>;
+  } else {
+    LoginSignup = <SignupLink></SignupLink>;
+  }
   return (
     <>
       <header className="text-gray-400 bg-gray-900 body-font ">

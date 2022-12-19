@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Auth/Login";
 import Signup from "./Auth/Signup";
 import Data from "./Components/Data";
-import CreateGass from "./CD/CreateGass"
+import CreateGass from "./CD/CreateGass";
+import ProtectedRoutes from "./Auth/ProtectedRoutes";
 function App() {
   // const isLoggedin = localStorage.getItem("isLoggedin")
   return (
@@ -16,11 +17,13 @@ function App() {
           <Router>
             <Navbar />
             <Routes>
-              <Route exact path="/" element={<Home></Home>} />
+              <Route element={<ProtectedRoutes></ProtectedRoutes>}>
+                <Route exact path="/" element={<Home></Home>} />
+                <Route exact path="/vault" element={<Data></Data>} />
+                <Route exact path="/create" element={<CreateGass></CreateGass>}/>
+              </Route>
               <Route exact path="/login" element={<Login></Login>} />
               <Route exact path="/signup" element={<Signup></Signup>} />
-              <Route exact path="/vault" element={<Data></Data>} />
-              <Route exact path="/create" element={<CreateGass></CreateGass>} />
             </Routes>
           </Router>
         </ChakraProvider>

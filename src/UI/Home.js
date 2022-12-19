@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     GetUser();
   })
-  
+ 
   return (
 
     <>
