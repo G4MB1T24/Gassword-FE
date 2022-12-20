@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState  } from "react";
 import Decrypter from "./Decrypter";
+import DataContext from "../Contexts/DataContext";
 import {
   Box,
   Text,
@@ -11,12 +12,17 @@ import {
   Flex,
 } from "@chakra-ui/react";
 const DataItem = (props) => {
+  const context = useContext(DataContext);
+  const { Delete } = context;
   const [Show, setShow] = useState(false);
-
+  
   const handleClose = () => setShow(!Show);
 
-  let { title, password, dateCreated, mail } = props;
-
+  let { title, password, dateCreated, mail , id } = props;
+  
+  const handleDelete  = async () => {
+    Delete(id)
+  }
   const ReadableDate = `${dateCreated.slice(5, 10)}/${dateCreated.slice(
     0,
     4
@@ -45,6 +51,16 @@ const DataItem = (props) => {
               mt={3}
               size={"sm"}
               onClick={handleClose}
+            >
+              Show!
+            </Button>
+            <Button
+              bgColor={"ActiveBorder"}
+              mx={2}
+              colorScheme={"red"}
+              mt={3}
+              size={"sm"}
+              onClick={handleDelete}
             >
               Show!
             </Button>

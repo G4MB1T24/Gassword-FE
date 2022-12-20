@@ -22,6 +22,7 @@ const Data = () => {
                 password={gassword.password}
                 dateCreated={gassword.dateCreate}
                 mail={gassword.mail}
+                id={gassword._id}
               ></DataItem>
             );
           })}

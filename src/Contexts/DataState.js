@@ -107,11 +107,29 @@ const DataState = (props) => {
     setUser(UserJson["email"])
     
   }
+
+  const Delete = async (id) => { 
+    fetch(`http://localhost:4000/api/gass/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token" : localStorage.getItem("token")
+      },
+      body: JSON.stringify({ mpin: localStorage.getItem("mpin") }),
+    }).then((res) => {
+      if (res.status === 200) {
+        alert("Deleted!");
+        window.location.reload();
+      } else {
+        alert("Something went wrong!");
+      }
+    });
+  }
   
   
   return (
     <>
-      <DataContext.Provider value={{  Gassword, Login, signup , isAuthenticated , GetData , CreateGass , GetUser , User }}>
+      <DataContext.Provider value={{  Gassword, Login, signup , isAuthenticated , GetData , CreateGass , GetUser , User , Delete }}>
         {props.children}
       </DataContext.Provider>
     </>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../Css/index.css";
 import DataContext from "../Contexts/DataContext";
 import SignupLink from "./SignupLink";
+import Logout from "../Auth/Logout";
 
 const Navbar = () => {
   const context = useContext(DataContext);
@@ -16,7 +17,7 @@ const Navbar = () => {
     LoginSignup = <SignupLink></SignupLink>;
   }
 
-  if (localStorage.getItem("isLoggedin") === "true") { 
+  if (localStorage.getItem("isLoggedin") === "true") {
     LoginSignup = <p className="hidden">Dumbfuck</p>;
   } else {
     LoginSignup = <SignupLink></SignupLink>;
@@ -52,6 +53,13 @@ const Navbar = () => {
             <Link to={"/create"} className="mr-5 hover:text-white">
               Create
             </Link>
+            <p>
+              {localStorage.getItem("isLoggedin") === "true" ? (
+                <Logout></Logout>
+              ) : (
+                <p className="hidden">Dumbfuck</p>
+              )}
+            </p>
           </nav>
           {LoginSignup}
         </div>
