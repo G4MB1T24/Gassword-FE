@@ -55,14 +55,14 @@ const DataItem = (props) => {
               Show!
             </Button>
             <Button
-              bgColor={"ActiveBorder"}
+              
               mx={2}
               colorScheme={"red"}
               mt={3}
               size={"sm"}
               onClick={handleDelete}
             >
-              Show!
+              Delete
             </Button>
           </Flex>
         </AccordionPanel>

@@ -17,9 +17,10 @@ const DataState = (props) => {
       body: JSON.stringify({ email, password, mpin , enc_key }),
     });
     const UserJson = await response.json();
-    console.log(UserJson)
+    // console.log(UserJson)
 
-    if(UserJson.success){
+    if (UserJson.success) {
+      window.location.href = "/vault";
       localStorage.setItem('token', UserJson.token);
       localStorage.setItem('isLoggedin', true);
       localStorage.setItem("mpin", mpin)
@@ -42,11 +43,12 @@ const DataState = (props) => {
 
     const UserJson = await response.json();
 
-    console.log(UserJson)
+    // console.log(UserJson)
     if(UserJson.success){
       localStorage.setItem('token', UserJson.token);
-      localStorage.setItem('enc_key' , enc_key)
-      localStorage.setItem("mpin" , mpin)
+      localStorage.setItem('isLoggedin', true);
+      localStorage.setItem("mpin", mpin)
+      localStorage.setItem("enc_key" , enc_key)
       setisAuthenticated(true)
       }
   };
@@ -67,7 +69,7 @@ const DataState = (props) => {
       
     })
     const GassJson = await response.json()
-    // console.log(GassJson)
+    console.log(GassJson)
     setGassword(GassJson)
 
   }
