@@ -2,13 +2,13 @@ import React, { useContext, useEffect } from "react";
 import { Box, Accordion } from "@chakra-ui/react";
 import DataContext from "../Contexts/DataContext";
 import DataItem from "./DataItem";
-import "../Css/index.css"
+import "../Css/index.css";
 const Data = () => {
   const context = useContext(DataContext);
   const { GetData, Gassword } = context;
   useEffect(() => {
     GetData();
-  },[]);
+  }, []);
 
   return (
     <>

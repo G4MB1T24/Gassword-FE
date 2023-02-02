@@ -12,22 +12,26 @@ function App() {
   // const isLoggedin = localStorage.getItem("isLoggedin")
   return (
     <>
-      <DataState>
-        <ChakraProvider>
-          <Router>
+      <Router>
+        <DataState>
+          <ChakraProvider>
             <Navbar />
             <Routes>
               <Route element={<ProtectedRoutes></ProtectedRoutes>}>
                 <Route exact path="/" element={<Home></Home>} />
                 <Route exact path="/vault" element={<Data></Data>} />
-                <Route exact path="/create" element={<CreateGass></CreateGass>}/>
+                <Route
+                  exact
+                  path="/create"
+                  element={<CreateGass></CreateGass>}
+                />
               </Route>
               <Route exact path="/login" element={<Login></Login>} />
               <Route exact path="/signup" element={<Signup></Signup>} />
             </Routes>
-          </Router>
-        </ChakraProvider>
-      </DataState>
+          </ChakraProvider>
+        </DataState>
+      </Router>
     </>
   );
 }

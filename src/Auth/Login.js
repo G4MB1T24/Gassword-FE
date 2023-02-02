@@ -1,127 +1,135 @@
 import React, { useContext, useState, useEffect } from "react";
-import "../Css/profile.css";
-import "../Css/index.css";
-import {
-  Text,
-  Box,
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Button,
-} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import DataContext from "../Contexts/DataContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const context = useContext(DataContext);
-  const { Login} = context;
+  const { Login, isAuthenticated } = context;
 
+  const [Creds, setCreds] = useState({
+    email: "",
+    password: "",
+    mpin: "",
+    enc_key: "",
+  });
+
+  const { email, password, mpin, enc_key } = Creds;
   const [disabled, setdisabled] = useState(true);
-  const [show, setShow] = React.useState(false);
-
-  const [Creds, setCreds] = useState({ email: "", password: "", mpin: "" ,  enc_key: ""});
-  const { email, password, mpin , enc_key } = Creds;
-
+  const handleChange = (e) => {
+    setCreds({ ...Creds, [e.target.name]: e.target.value });
+  };
+  if (isAuthenticated) {
+    navigate("/");
+  }
+  const FormSubmit = (e) => {
+    e.preventDefault();
+    Login(email, password, mpin, enc_key);
+  };
   useEffect(() => {
-    if (mpin.length === 4 && email.length > 0 && password.length > 5 && enc_key.length > 4) {
+    if (
+      mpin.length === 4 &&
+      email.length > 0 &&
+      password.length > 5 &&
+      enc_key.length > 4
+    ) {
       setdisabled(false);
     } else {
       setdisabled(true);
     }
-  }, [mpin, email, password , enc_key]);
-
-  const handleClick = () => setShow(!show);
-
-  const handleChange = (e) => {
-    setCreds({ ...Creds, [e.target.name]: e.target.value });
-  };
-
-  const FormSubmit = () => {
-    Login(email, password, mpin , enc_key);
-  };
-
+  }, [mpin, email, password, enc_key]);
   return (
     <>
-      <div className="gradient-background">
-        <Box className="">
-          <Flex h={"2xl"} justify={"center"} align={"center"}>
-            <Box className="main">
-              <Text
-                fontSize={"4xl"}
-                fontFamily={"sans-serif"}
-                fontWeight={"bold"}
-                color={"white"}
+      <div className="flex items-center h-screen bg-gray-50 py-12 bg-gradient-to-r from-purple-400 to-pink-500 to-blue-300 to-red-300 ">
+        <div className="w-full max-w-sm mx-auto">
+          <form
+            // onSubmit={handleSubmit}
+            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          >
+            <h2 className="text-lg font-medium mb-4 text-center">Login</h2>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-medium mb-2"
+                htmlFor="email"
               >
-                Login
-              </Text>
-              <Box className="rounded-lg" bgColor={"white"}>
-                <Input
-                  value={Creds.email}
-                  name="email"
-                  onChange={handleChange}
-                  size={"lg"}
-                  variant={"filled"}
-                  placeholder="Your email"
-                />
-              </Box>
-              <Box className="rounded-lg" mt={"5"} bgColor={"white"}>
-                <InputGroup w={"25rem"} size="lg">
-                  <Input
-                    value={Creds.password}
-                    onChange={handleChange}
-                    name="password"
-                    variant={"filled"}
-                    pr="4.5rem"
-                    type={show ? "text" : "password"}
-                    placeholder="Enter password"
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button bg={"gray.300"} size="sm" onClick={handleClick}>
-                      {show ? "Hide" : "Show"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </Box>
-              <Box className="rounded-lg" mt={"5"} bgColor={"white"}>
-                <InputGroup w={"25rem"} size="lg">
-                  <Input
-                    value={Creds.enc_key}
-                    onChange={handleChange}
-                    name="enc_key"
-                    variant={"filled"}
-                    pr="4.5rem"
-                    type={show ? "text" : "password"}
-                    placeholder="Enter password"
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button bg={"gray.300"} size="sm" onClick={handleClick}>
-                      {show ? "Hide" : "Show"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </Box>
-              <Box mt={"5"} className="rounded-lg">
-                <Input
-                  justifyItems={"center"}
-                  value={Creds.mpin}
-                  name="mpin"
-                  onChange={handleChange}
-                  size={"md"}
-                  variant={"filled"}
-                  placeholder="MPIN"
-                  w={"20"}
-                />
-              </Box>
-              <Box mt={"5"}>
-                <Flex justify={"center"}>
-                  <Button disabled={disabled} onClick={FormSubmit} size={"md"}>
-                    Login
-                  </Button>
-                </Flex>
-              </Box>
-            </Box>
-          </Flex>
-        </Box>
+                Email
+              </label>
+              <input
+                className="w-full border border-gray-400 rounded py-2 px-3"
+                id="email"
+                name="email"
+                value={Creds.email}
+                onChange={handleChange}
+                placeholder="Your Email"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-medium mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="w-full border border-gray-400 rounded py-2 px-3"
+                type="password"
+                id="password"
+                value={Creds.password}
+                onChange={handleChange}
+                name="password"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-medium mb-2"
+                htmlFor="enckey"
+              >
+                Encryption Key
+              </label>
+              <input
+                className="w-full border border-gray-400 rounded py-2 px-3"
+                type="text"
+                id="enckey"
+                value={Creds.enc_key}
+                onChange={handleChange}
+                name="enc_key"
+                placeholder="Encryption Key"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 font-medium mb-2"
+                htmlFor="mpin"
+              >
+                MPIN
+              </label>
+              <input
+                className="w-full border border-gray-400 rounded py-2 px-3"
+                type="text"
+                id="mpin"
+                value={Creds.mpin}
+                name="mpin"
+                onChange={handleChange}
+                placeholder="mpin"
+                required
+              />
+            </div>
+            <div className="flex items-center justify-between"></div>
+            <button
+              className="bg-purple-500 hover:bg-purple-400 text-white font-medium py-2 px-4 rounded"
+              type="submit"
+              onClick={FormSubmit}
+              disabled={Boolean(disabled)}
+            >
+              Login
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
