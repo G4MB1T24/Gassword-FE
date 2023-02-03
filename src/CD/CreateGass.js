@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Box, Flex, Input, InputGroup, Button } from "@chakra-ui/react";
 import DataContext from "../Contexts/DataContext";
 
 const CreateGass = () => {
@@ -26,70 +25,85 @@ const CreateGass = () => {
     setPayload({ ...Payload, [e.target.name]: e.target.value });
   };
   const Submit = (e) => {
+    e.preventDefault()
     CreateGass(title, email, password);
     setTimeout(() => {
       setPayload({
         title: "",
         email: "",
         password: "",
-      })
-      document.getElementById("formmain").reset()
+      });
+      document.getElementById("formmain").reset();
     }, 500);
   };
 
   return (
     <>
-      <Box className="">
-        <Flex h={"2xl"} justify={"center"} align={"center"}>
-          <Box className="main">
-            <form id="formmain">
-
-            <Box className="rounded-lg" bgColor={"white"}>
-              <Input
-              className="input"
-              size={"lg"}
-              variant={"filled"}
+      <div className="flex items-center h-screen bg-gradient-to-r from-blue-300 to-white">
+        <form
+          id="formmain"
+          className="bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-auto"
+        >
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-medium mb-2"
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              className="w-full p-2 border border-gray-400 rounded-lg"
+              type="text"
+              id="title"
               name="title"
               onChange={handleChange}
-              placeholder="Title"
-              />
-            </Box>
-
-            <Box className="rounded-lg" mt={"5"} bgColor={"white"}>
-              <InputGroup w={"25rem"} size="lg">
-                <Input
-                className="input"
-                variant={"filled"}
-                pr="4.5rem"
-                name="email"
-                  onChange={handleChange}
-                  placeholder="Email"
-                />
-              </InputGroup>
-            </Box>
-            <Box className="rounded-lg" mt={"5"} bgColor={"white"}>
-              <InputGroup w={"25rem"} size="lg">
-                <Input
-                className="input"
-                onChange={handleChange}
-                name="password"
-                variant={"filled"}
-                pr="4.5rem"
-                placeholder="Enter password"
-                />
-              </InputGroup>
-            </Box>
-            <Box mt={"5"}>
-              <Flex justify={"center"}>
-                <Button disabled={disabled} onClick={Submit} size={"md"}>
-                  Add
-                </Button>
-              </Flex>
-            </Box>
-                </form>
-          </Box>
-        </Flex>
-      </Box>
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-medium mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className="w-full p-2 border border-gray-400 rounded-lg"
+              type="email"
+              id="email"
+              name="email"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-medium mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className="w-full p-2 border border-gray-400 rounded-lg"
+              type="password"
+              id="password"
+              onChange={handleChange}
+              name="password"
+              required
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              disabled={disabled}
+              onClick={Submit}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+              type="submit"
+            >
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
