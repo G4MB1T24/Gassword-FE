@@ -61,7 +61,7 @@ const Navbar = () => {
             Gassword
           </Text>
         </Link>
-        <nav className="text-base justify-center">
+        {isAuthenticated ? <nav className="text-base justify-center">
           <Link to="/" className="mr-5 hover:text-white">
             Home
           </Link>
@@ -71,14 +71,14 @@ const Navbar = () => {
           <Link to="/create" className="mr-5 hover:text-white">
             Create
           </Link>
-          <Box display={["none", "inline", ]}>
+          <Box display={["none", "inline",]}>
             {localStorage.getItem("isLoggedin") === "true" ? (
               <Logout />
             ) : (
               <Box className="hidden"></Box>
             )}
           </Box>
-        </nav>
+        </nav> : <p></p>}
         {LoginSignup}
       </Flex>
     </Box>

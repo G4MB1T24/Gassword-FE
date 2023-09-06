@@ -36,8 +36,8 @@ const Home = () => {
                 className="border border-gray-400 rounded p-2 w-full"
                 placeholder="Encryption Key"
                 onChange={handleChange}
-                  name="checker"
-                  value={Checker}
+                name="checker"
+                value={Checker}
               />
             </div>
             <button
